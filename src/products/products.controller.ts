@@ -3,9 +3,9 @@ import {
   Get,
   Post,
   Body,
-  Patch,
   Param,
   Delete,
+  Put,
 } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
@@ -17,7 +17,11 @@ export class ProductsController {
 
   @Post()
   create(@Body() createProductDto: CreateProductDto) {
-    return this.productsService.create(createProductDto);
+    console.log(createProductDto);
+    if (createProductDto.price > 13) {
+      throw new Error('price is not validate');
+    }
+    return { data: createProductDto, status: 200 };
   }
 
   @Get()
@@ -30,9 +34,10 @@ export class ProductsController {
     return { id };
   }
 
-  @Patch(':id')
+  @Put(':id')
   update(@Param('id') id: string, @Body() updateProductDto: UpdateProductDto) {
-    return this.productsService.update(+id, updateProductDto);
+    console.log(updateProductDto);
+    return { method: 'put', id: id };
   }
 
   @Delete(':id')
