@@ -1,9 +1,9 @@
 import { randomUUID } from 'crypto';
 import { blog } from './blog';
 export enum Role {
-  admin = 'adimn',
+  admin = 'admin',
   user = 'user',
-  athor = 'athor',
+  athor = 'author',
 }
 export class User {
   static phoneRegex = /^\+?[1-9]\d{7,14}$/;
@@ -20,12 +20,24 @@ export class User {
     private secretKey: string,
   ) {
     this.id = randomUUID();
+    this.validation();
   }
 
   get fullName(): string {
     return this.firstName + ' ' + this.lastName;
   }
-
+  get GetPassword() {
+    return this.password;
+  }
+  get GetEmail() {
+    return this.email;
+  }
+  get GetPhoneNumber() {
+    return this.phoneNumber;
+  }
+  get GetSecretKey() {
+    return this.secretKey;
+  }
   private checkValidationPassword() {
     if (this.password.length < 5)
       throw new Error('Password showld more than 5 charecter');
@@ -41,6 +53,12 @@ export class User {
 
   private checkValidPhoneNumber() {
     if (!User.phoneRegex.test(this.phoneNumber)) throw new Error('');
+  }
+
+  private validation() {
+    this.checkValidEmail();
+    this.checkValidPhoneNumber();
+    this.checkValidationPassword();
   }
 
   private changeRole(newRole: Role) {

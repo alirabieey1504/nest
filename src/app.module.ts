@@ -11,7 +11,7 @@ import { CommentModule } from './presentation/module/comment.module';
       port: 5432,
       username: 'ali',
       password: 'postgres',
-      database: 'viler',
+      database: 'blog',
       autoLoadEntities: true,
       synchronize: true,
     }),

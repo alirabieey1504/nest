@@ -1,5 +1,5 @@
 import { User } from '../entities/user';
 
-export class Iuser {
-  save(this: void, user: User): Promise<object>;
+export interface IuserRepository {
+  save(user: User): Promise<object>;
 }
