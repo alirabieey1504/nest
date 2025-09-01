@@ -1,0 +1,57 @@
+import { randomUUID } from 'crypto';
+import { blog } from './blog';
+export enum Role {
+  admin = 'adimn',
+  user = 'user',
+  athor = 'athor',
+}
+export class User {
+  static phoneRegex = /^\+?[1-9]\d{7,14}$/;
+  public blog: blog[] = [];
+  private role: Role = Role.user;
+  private readonly id: string;
+
+  constructor(
+    public firstName: string,
+    public lastName: string,
+    private password: string,
+    private email: string,
+    private phoneNumber: string,
+    private secretKey: string,
+  ) {
+    this.id = randomUUID();
+  }
+
+  get fullName(): string {
+    return this.firstName + ' ' + this.lastName;
+  }
+
+  private checkValidationPassword() {
+    if (this.password.length < 5)
+      throw new Error('Password showld more than 5 charecter');
+    if (/\d/.test(this.password)) throw new Error('Password contain a number');
+    if (!/[A-Z]/.test(this.password))
+      throw new Error('Password must contain at least one uppercase letter');
+  }
+
+  private checkValidEmail() {
+    if (!this.email.includes('@'))
+      throw new Error('Email must contain contian @ charecter');
+  }
+
+  private checkValidPhoneNumber() {
+    if (!User.phoneRegex.test(this.phoneNumber)) throw new Error('');
+  }
+
+  private changeRole(newRole: Role) {
+    this.role = newRole;
+  }
+  getRole() {
+    return this.role;
+  }
+  promoteToadmin() {
+    if (this.blog.length >= 1) this.changeRole(Role.athor);
+    if (this.secretKey == 'alibaba') this.changeRole(Role.admin);
+    else throw new Error('cannot promote to admin');
+  }
+}
