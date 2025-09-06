@@ -12,7 +12,7 @@ import { AuthRepository } from 'src/infrastracture/repository/user.repository';
   providers: [
     AuthService,
     {
-      provide: 'IuserRepository',
+      provide: 'IUserRepository',
       useFactory: (dataSource: DataSource) => new AuthRepository(dataSource),
       inject: [DataSource],
     },

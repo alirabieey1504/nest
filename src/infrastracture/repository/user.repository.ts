@@ -1,9 +1,9 @@
-import { IuserRepository } from 'src/domain/interfaces/interface.user';
+import { IUserRepository } from 'src/domain/interfaces/interface.user';
 import { DataSource, Repository } from 'typeorm';
 import { UserEntity } from '../entities/user';
 import { User } from 'src/domain/entities/user';
 
-export class AuthRepository implements IuserRepository {
+export class AuthRepository implements IUserRepository {
   private AuthRepo: Repository<UserEntity>;
   constructor(private readonly dataSource: DataSource) {
     this.AuthRepo = this.dataSource.getRepository(UserEntity);

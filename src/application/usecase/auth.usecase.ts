@@ -1,4 +1,4 @@
-import type { IuserRepository } from 'src/domain/interfaces/interface.user';
+import type { IUserRepository } from 'src/domain/interfaces/interface.user';
 import { User } from '../../domain/entities/user';
 
 import { RegisterInput } from '../dtos/interface.register';
@@ -6,8 +6,8 @@ import { Inject, Injectable } from '@nestjs/common';
 @Injectable()
 export class AuthService {
   constructor(
-    @Inject('IuserRepository')
-    private readonly AuthRepo: IuserRepository,
+    @Inject('IUserRepository')
+    private readonly AuthRepo: IUserRepository,
   ) {}
 
   async Register(input: RegisterInput): Promise<object> {

@@ -3,7 +3,7 @@ import { blog } from './blog';
 export enum Role {
   admin = 'admin',
   user = 'user',
-  athor = 'author',
+  author = 'author',
 }
 export class User {
   static phoneRegex = /^\+?[1-9]\d{7,14}$/;
@@ -68,7 +68,7 @@ export class User {
     return this.role;
   }
   promoteToadmin() {
-    if (this.blog.length >= 1) this.changeRole(Role.athor);
+    if (this.blog.length >= 1) this.changeRole(Role.author);
     if (this.secretKey == 'alibaba') this.changeRole(Role.admin);
     else throw new Error('cannot promote to admin');
   }

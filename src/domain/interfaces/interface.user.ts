@@ -1,5 +1,5 @@
 import { User } from '../entities/user';
 
-export interface IuserRepository {
+export interface IUserRepository {
   save(user: User): Promise<object>;
 }
