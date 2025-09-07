@@ -1,10 +1,10 @@
 import type { IUserRepository } from 'src/domain/interfaces/interface.user';
-import { User } from '../../domain/entities/user';
+import { User } from '../../../domain/entities/user';
 
-import { RegisterInput } from '../dtos/interface.register';
+import { RegisterInput } from '../../dtos/interface.register';
 import { Inject, Injectable } from '@nestjs/common';
 @Injectable()
-export class AuthService {
+export class RegisterService {
   constructor(
     @Inject('IUserRepository')
     private readonly AuthRepo: IUserRepository,

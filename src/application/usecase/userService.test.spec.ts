@@ -1,5 +1,5 @@
 import { Iuser } from '../../domain/interfaces/interface.user';
-import { AuthService } from './auth.usecase';
+import { AuthService } from './user/register.usecase';
 const userRepoMock: Iuser = {
   save: jest.fn().mockResolvedValue(async () => Promise.resolve({})),
 };

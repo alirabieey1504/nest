@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserEntity } from 'src/infrastracture/entities/user';
 import { UserController } from '../controller/user.controller';
-import { AuthService } from 'src/application/usecase/auth.usecase';
+import { AuthService } from 'src/application/usecase/user/register.usecase';
 import { DataSource } from 'typeorm';
 import { AuthRepository } from 'src/infrastracture/repository/user.repository';
 
