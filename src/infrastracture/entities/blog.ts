@@ -1,1 +1,4 @@
-export class BlogDto {}
+export class BlogDto {
+  title: string;
+  blog: string;
+}
