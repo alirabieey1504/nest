@@ -1,17 +1,29 @@
-import type { IUserRepository } from 'src/domain/interfaces/interface.user';
+import type { IUserRepository } from 'src/domain/interfaces/user/interface.user';
 import { User } from '../../../domain/entities/user';
 
 import { RegisterInput } from '../../dtos/interface.register';
-import { Inject, Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
+import { FindUserService } from './find.usecase';
 @Injectable()
 export class RegisterService {
   constructor(
     @Inject('IUserRepository')
-    private readonly AuthRepo: IUserRepository,
+    private readonly RegisterRepo: IUserRepository,
+    private readonly findUserService: FindUserService,
   ) {}
 
   async Register(input: RegisterInput): Promise<object> {
-    try {
+    const resutFindUser = await this.findUserService.findUser({
+      phoneNumber: input.phoneNumber,
+      email: input.email,
+    });
+    console.log(resutFindUser, 'this is resutl find');
+    if (resutFindUser == true) {
+      throw new HttpException(
+        'user with this email or phoneNumber already exist ',
+        HttpStatus.CONFLICT,
+      );
+    } else {
       const user = new User(
         input.firstName,
         input.lastName,
@@ -22,16 +34,9 @@ export class RegisterService {
       );
 
       console.log(input, 'this is input');
-      const test = await this.AuthRepo.save(user);
+      const test = await this.RegisterRepo.save(user);
       console.log(test, 'this is a test');
       return test;
-    } catch (error) {
-      const err = error as Error;
-      console.log(err.message, 'this is message?s');
-      return {
-        message: err.message,
-        status: err.name,
-      };
     }
   }
   async login() {}

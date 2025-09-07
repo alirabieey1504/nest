@@ -1,7 +1,8 @@
-import { IUserRepository } from 'src/domain/interfaces/interface.user';
+import { IUserRepository } from 'src/domain/interfaces/user/interface.user';
 import { DataSource, Repository } from 'typeorm';
 import { UserEntity } from '../entities/user';
 import { User } from 'src/domain/entities/user';
+import { FindUser } from 'src/application/dtos/interface.finduser';
 
 export class AuthRepository implements IUserRepository {
   private AuthRepo: Repository<UserEntity>;
@@ -22,5 +23,13 @@ export class AuthRepository implements IUserRepository {
     });
     console.log(saveUser, 'this is co');
     return await this.AuthRepo.save(saveUser);
+  }
+  async findByPhone(data: FindUser): Promise<boolean | undefined> {
+    console.log('this is repo phone find');
+    const user = await this.AuthRepo.findOne({
+      where: [{ phoneNumber: data.phoneNumber }, { email: data.email }],
+    });
+    console.log(user, 'this is resutl find user');
+    return !!user;
   }
 }
