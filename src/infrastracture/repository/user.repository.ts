@@ -4,7 +4,7 @@ import { UserEntity } from '../entities/user';
 import { User } from 'src/domain/entities/user';
 import { FindUser } from 'src/application/dtos/interface.finduser';
 
-export class AuthRepository implements IUserRepository {
+export class RegisterRepository implements IUserRepository {
   private AuthRepo: Repository<UserEntity>;
   constructor(private readonly dataSource: DataSource) {
     this.AuthRepo = this.dataSource.getRepository(UserEntity);

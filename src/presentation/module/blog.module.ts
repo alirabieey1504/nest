@@ -1,9 +1,8 @@
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { BlogDto } from 'src/infrastracture/entities/blog';
 import { BlogController } from '../controller/blog.controller';
+import { DatabaseModule } from 'src/infrastracture/database/database.module';
 @Module({
-  imports: [TypeOrmModule.forFeature([BlogDto])],
+  imports: [DatabaseModule],
   controllers: [BlogController],
   providers: [],
 })

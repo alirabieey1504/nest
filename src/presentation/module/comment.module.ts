@@ -1,9 +1,8 @@
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { CommentDto } from 'src/infrastracture/entities/comments';
 import { CommentController } from '../controller/comment.controller';
+import { DatabaseModule } from 'src/infrastracture/database/database.module';
 @Module({
-  imports: [TypeOrmModule.forFeature([CommentDto])],
+  imports: [DatabaseModule],
   controllers: [CommentController],
   providers: [],
 })

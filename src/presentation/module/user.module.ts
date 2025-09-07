@@ -1,23 +1,14 @@
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserEntity } from 'src/infrastracture/entities/user';
 import { UserController } from '../controller/user.controller';
 import { RegisterService } from 'src/application/usecase/user/register.usecase';
-import { DataSource } from 'typeorm';
-import { AuthRepository } from 'src/infrastracture/repository/user.repository';
+// import { DataSource } from 'typeorm';
 import { FindUserService } from 'src/application/usecase/user/find.usecase';
+import { DatabaseModule } from 'src/infrastracture/database/database.module';
+import { UserRepositoryProvider } from 'src/infrastracture/providers/user.repository.provider';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([UserEntity])],
+  imports: [DatabaseModule],
   controllers: [UserController],
-  providers: [
-    RegisterService,
-    FindUserService,
-    {
-      provide: 'IUserRepository',
-      useFactory: (dataSource: DataSource) => new AuthRepository(dataSource),
-      inject: [DataSource],
-    },
-  ],
+  providers: [RegisterService, FindUserService, UserRepositoryProvider],
 })
 export class UserModule {}

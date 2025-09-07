@@ -1,1 +1,1 @@
-export class CommentDto {}
+export class CommentEntity {}

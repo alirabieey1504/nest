@@ -1,4 +1,1 @@
-export class BlogDto {
-  title: string;
-  blog: string;
-}
+export class BlogEntity {}
