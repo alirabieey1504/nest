@@ -1,13 +1,19 @@
 import { IUserRepository } from 'src/domain/interfaces/user/interface.user';
-import { DataSource, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 import { UserEntity } from '../entities/user';
 import { User } from 'src/domain/entities/user';
 import { FindUser } from 'src/application/dtos/interface.finduser';
-
+import { UserInput } from 'src/application/dtos/interface.register';
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+@Injectable()
 export class RegisterRepository implements IUserRepository {
   private AuthRepo: Repository<UserEntity>;
-  constructor(private readonly dataSource: DataSource) {
-    this.AuthRepo = this.dataSource.getRepository(UserEntity);
+  constructor(
+    @InjectRepository(UserEntity)
+    private readonly repository: Repository<UserEntity>,
+  ) {
+    this.AuthRepo = this.repository;
   }
 
   async save(user: User): Promise<UserEntity> {
@@ -31,5 +37,10 @@ export class RegisterRepository implements IUserRepository {
     });
     console.log(user, 'this is resutl find user');
     return !!user;
+  }
+  async list(): Promise<UserInput[]> {
+    const allUsers = await this.AuthRepo.find();
+    console.log(allUsers, 'this is user');
+    return allUsers;
   }
 }

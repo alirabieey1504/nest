@@ -1,4 +1,4 @@
-export interface RegisterInput {
+export interface UserInput {
   firstName: string;
   lastName: string;
   password: string;

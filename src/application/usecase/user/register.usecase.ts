@@ -1,7 +1,7 @@
 import type { IUserRepository } from 'src/domain/interfaces/user/interface.user';
 import { User } from '../../../domain/entities/user';
 
-import { RegisterInput } from '../../dtos/interface.register';
+import { UserInput } from '../../dtos/interface.register';
 import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
 import { FindUserService } from './find.usecase';
 import { IUserRepositoryToken } from 'src/presentation/tokens/user.repository';
@@ -13,7 +13,7 @@ export class RegisterService {
     private readonly findUserService: FindUserService,
   ) {}
 
-  async Register(input: RegisterInput): Promise<object> {
+  async Register(input: UserInput): Promise<object> {
     const resutFindUser = await this.findUserService.findUser({
       phoneNumber: input.phoneNumber,
       email: input.email,

@@ -4,11 +4,23 @@ import { RegisterService } from 'src/application/usecase/user/register.usecase';
 // import { DataSource } from 'typeorm';
 import { FindUserService } from 'src/application/usecase/user/find.usecase';
 import { DatabaseModule } from 'src/infrastracture/database/database.module';
-import { UserRepositoryProvider } from 'src/infrastracture/providers/user.repository.provider';
+// import { UserRepositoryProvider } from 'src/infrastracture/providers/user.repository.provider';
+import { ListService } from 'src/application/usecase/user/list.usecase';
+import { IUserRepositoryToken } from '../tokens/user.repository';
+import { RegisterRepository } from 'src/infrastracture/repository/user.repository';
 
 @Module({
   imports: [DatabaseModule],
   controllers: [UserController],
-  providers: [RegisterService, FindUserService, UserRepositoryProvider],
+  providers: [
+    {
+      provide: IUserRepositoryToken,
+      useClass: RegisterRepository,
+    },
+    RegisterService,
+    FindUserService,
+    ListService,
+    // UserRepositoryProvider,
+  ],
 })
 export class UserModule {}

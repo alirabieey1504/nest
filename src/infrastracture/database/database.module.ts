@@ -1,27 +1,23 @@
 import { Module } from '@nestjs/common';
-import { DataSource } from 'typeorm';
 import { UserEntity } from '../entities/user';
 import { CommentEntity } from '../entities/comments';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { BlogEntity } from '../entities/blog';
 
 @Module({
-  providers: [
-    {
-      provide: DataSource,
-      useFactory: async () => {
-        const dataSource = new DataSource({
-          type: 'postgres',
-          host: 'localhost',
-          port: 5432,
-          username: 'ali',
-          password: 'postgres',
-          database: 'blog',
-          entities: [UserEntity, CommentEntity, CommentEntity],
-          synchronize: true,
-        });
-        return dataSource.initialize();
-      },
-    },
+  imports: [
+    TypeOrmModule.forRoot({
+      type: 'postgres',
+      host: 'localhost',
+      port: 5432,
+      username: 'ali',
+      password: 'postgres',
+      database: 'blog',
+      entities: [UserEntity, CommentEntity, BlogEntity],
+      synchronize: true,
+    }),
+    TypeOrmModule.forFeature([UserEntity, CommentEntity, BlogEntity]),
   ],
-  exports: [DataSource],
+  exports: [TypeOrmModule],
 })
 export class DatabaseModule {}
