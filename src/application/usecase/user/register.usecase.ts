@@ -1,7 +1,7 @@
 import type { IUserRepository } from 'src/domain/interfaces/user/interface.user';
 import { User } from '../../../domain/entities/user';
 
-import { UserInput } from '../../dtos/interface.register';
+import { UserInput } from '../../dtos/user/interface.register';
 import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
 import { FindUserService } from './find.usecase';
 import { IUserRepositoryToken } from 'src/presentation/tokens/user.repository';

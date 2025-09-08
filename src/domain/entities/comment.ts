@@ -1,4 +1,4 @@
-import { blog } from './blog';
+import { blogDto } from 'src/application/dtos/blog/interface.create';
 import { User, Role } from './user';
 
 export class comment {
@@ -8,7 +8,7 @@ export class comment {
     public readonly user: User,
     public readonly text: string,
     public readonly createdAt: string,
-    public blog: blog,
+    public blog: blogDto,
   ) {}
   get userRole(): Role {
     return this.user.getRole();

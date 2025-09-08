@@ -1,13 +1,17 @@
+import { randomUUID } from 'node:crypto';
 import { comment } from './comment';
-import { User } from './user';
-
-export class blog {
+import { UserInput } from 'src/application/dtos/user/interface.register';
+export class Blog {
+  public comments: comment[];
+  public readonly createdAt: Date;
+  private id: string;
+  public readonly countView: number;
   constructor(
     public title: string,
     public description: string,
-    public readonly createdAt: string,
-    public readonly author: User,
-    public readonly countView: number,
-    public comments: comment[],
-  ) {}
+    public author: UserInput,
+  ) {
+    this.id = randomUUID();
+    this.createdAt = new Date();
+  }
 }

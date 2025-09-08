@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { FindUser } from 'src/application/dtos/interface.finduser';
+import { FindUser } from 'src/application/dtos/user/interface.finduser';
 import type { IUserRepository } from 'src/domain/interfaces/user/interface.user';
 import { IUserRepositoryToken } from 'src/presentation/tokens/user.repository';
 @Injectable()

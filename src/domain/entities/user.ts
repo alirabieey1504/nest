@@ -1,5 +1,5 @@
 import { randomUUID } from 'crypto';
-import { blog } from './blog';
+import { Blog } from './blog';
 export enum Role {
   admin = 'admin',
   user = 'user',
@@ -7,7 +7,7 @@ export enum Role {
 }
 export class User {
   static phoneRegex = /^\+?[1-9]\d{7,14}$/;
-  public blog: blog[] = [];
+  public blog: Blog[] = [];
   private role: Role = Role.user;
   private readonly id: string;
 
