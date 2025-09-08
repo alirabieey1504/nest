@@ -1,10 +1,11 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { FindUser } from 'src/application/dtos/interface.finduser';
 import type { IUserRepository } from 'src/domain/interfaces/user/interface.user';
+import { IUserRepositoryToken } from 'src/presentation/tokens/user.repository';
 @Injectable()
 export class FindUserService {
   constructor(
-    @Inject('IUserRepository')
+    @Inject(IUserRepositoryToken)
     private readonly RegisterRepo: IUserRepository,
   ) {}
   async findUser(data: FindUser): Promise<boolean> {

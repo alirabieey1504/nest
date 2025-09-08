@@ -4,10 +4,11 @@ import { User } from '../../../domain/entities/user';
 import { RegisterInput } from '../../dtos/interface.register';
 import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
 import { FindUserService } from './find.usecase';
+import { IUserRepositoryToken } from 'src/presentation/tokens/user.repository';
 @Injectable()
 export class RegisterService {
   constructor(
-    @Inject('IUserRepository')
+    @Inject(IUserRepositoryToken)
     private readonly RegisterRepo: IUserRepository,
     private readonly findUserService: FindUserService,
   ) {}
