@@ -3,7 +3,7 @@ import { blogDto } from 'src/application/dtos/blog/interface.create';
 import { IBlogRepository } from 'src/domain/interfaces/blog/interface.blog';
 import { IUserRepository } from 'src/domain/interfaces/user/interface.user';
 
-export class CreateBlogService {
+export class BlogService {
   constructor(
     private readonly BlogRepo: IBlogRepository,
     private readonly usersRepo: IUserRepository,
@@ -28,8 +28,7 @@ export class CreateBlogService {
       console.log(myUser, 'this is usr');
       // const lb = new Blog(data.title, data.description, myUser);
       // console.log(lb, 'this is new blog');
-      const blog = await this.BlogRepo.createBlog();
-      return blog;
+      return await this.BlogRepo.createBlog();
     }
   }
 }

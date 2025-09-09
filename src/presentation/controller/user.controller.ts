@@ -1,5 +1,5 @@
 import { Controller, Post, Body, Get } from '@nestjs/common';
-import { RegisterRequestDto } from '../dto/registerRequestDto';
+import { RegisterRequestDto } from '../dto/user/registerRequestDto';
 import { RegisterService } from 'src/application/usecase/user/register.usecase';
 import { UserInput } from 'src/application/dtos/user/interface.register';
 import { ListService } from 'src/application/usecase/user/list.usecase';
