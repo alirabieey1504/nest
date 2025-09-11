@@ -12,13 +12,12 @@ export class FindUserService {
     console.log(data, 'this is data my');
     console.log(data.phoneNumber, 'this is phone');
     console.log('this is ff');
-    const result = await this.RegisterRepo.findByPhone({
+    const user = await this.RegisterRepo.findByPhone({
       phoneNumber: data.phoneNumber,
       email: data.email,
     });
-    console.log(result, 'this is result');
     console.log('this is a test that work');
-    if (result) return true;
+    if (user) return true;
     else return false;
   }
 }

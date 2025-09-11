@@ -39,8 +39,6 @@ export class User {
     return this.secretKey;
   }
   private checkValidationPassword() {
-    if (this.password.length < 5)
-      throw new Error('Password showld more than 5 charecter');
     if (/\d/.test(this.password)) throw new Error('Password contain a number');
     if (!/[A-Z]/.test(this.password))
       throw new Error('Password must contain at least one uppercase letter');

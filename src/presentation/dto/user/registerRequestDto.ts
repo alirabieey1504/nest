@@ -1,10 +1,28 @@
+import {
+  IsEmail,
+  IsNotEmpty,
+  IsOptional,
+  IsPhoneNumber,
+  IsString,
+  Length,
+} from 'class-validator';
+
 export class RegisterRequestDto {
-  constructor(
-    public firstName: string,
-    public lastName: string,
-    public password: string,
-    public email: string,
-    public phoneNumber: string,
-    private secretKey?: string,
-  ) {}
+  @IsString()
+  @IsNotEmpty()
+  firstName: string;
+  @IsString()
+  lastName: string;
+  @IsString()
+  @Length(6, 16)
+  @IsNotEmpty()
+  password: string;
+  @IsNotEmpty()
+  @IsEmail()
+  email: string;
+  @IsPhoneNumber()
+  phoneNumber: string;
+  @IsOptional()
+  @IsString()
+  secretKey?: string;
 }

@@ -31,13 +31,17 @@ export class RegisterRepository implements IUserRepository {
     return await this.AuthRepo.save(saveUser);
   }
   async findByPhone(data: FindUser): Promise<UserEntity | null> {
-    console.log('this is repo phone find');
-    const user = await this.AuthRepo.findOne({
-      where: [{ phoneNumber: data.phoneNumber }, { email: data.email }],
-    });
-    console.log(user, 'this is resutl find user');
+    try {
+      console.log('this is repo phone find');
+      const user = await this.AuthRepo.findOne({
+        where: [{ phoneNumber: data.phoneNumber }, { email: data.email }],
+      });
+      console.log(user, 'this is resutl find user');
 
-    return user;
+      return user;
+    } catch (error) {
+      throw new Error(error);
+    }
   }
   async list(): Promise<UserInput[]> {
     const allUsers = await this.AuthRepo.find();

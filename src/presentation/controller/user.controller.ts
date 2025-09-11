@@ -1,4 +1,10 @@
-import { Controller, Post, Body, Get } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  Get,
+  BadRequestException,
+} from '@nestjs/common';
 import { RegisterRequestDto } from '../dto/user/registerRequestDto';
 import { RegisterService } from 'src/application/usecase/user/register.usecase';
 import { UserInput } from 'src/application/dtos/user/interface.register';
@@ -12,17 +18,22 @@ export class UserController {
   ) {}
   @Post('register')
   async submitDataForRegister(@Body() dto: RegisterRequestDto) {
-    console.log(dto, 'this is input');
-    const input: UserInput = {
-      firstName: dto.firstName,
-      lastName: dto.lastName,
-      password: dto.password,
-      email: dto.email,
-      phoneNumber: dto.phoneNumber,
-    };
-    const user = await this.registerService.Register(input);
-    console.log(user, 'this is req');
-    return user;
+    try {
+      console.log(dto, 'this is input');
+      const input: UserInput = {
+        firstName: dto.firstName,
+        lastName: dto.lastName,
+        password: dto.password,
+        email: dto.email,
+        phoneNumber: dto.phoneNumber,
+        secretKey: dto.secretKey,
+      };
+      const user = await this.registerService.Register(input);
+      console.log(user, 'this is req');
+      return user;
+    } catch (error) {
+      throw new BadRequestException(`${error}`);
+    }
   }
   @Get('list')
   async listUser() {

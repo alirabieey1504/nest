@@ -4,6 +4,8 @@ import { DatabaseModule } from 'src/infrastracture/database/database.module';
 import { BlogService } from 'src/application/usecase/blog/create.usecase';
 import { BlogRepository } from 'src/infrastracture/repository/blog.repository';
 import { IBlogRepositoryToken } from '../tokens/blog.repository';
+import { IUserRepositoryToken } from '../tokens/user.repository';
+import { RegisterRepository } from 'src/infrastracture/repository/user.repository';
 @Module({
   imports: [DatabaseModule],
   controllers: [BlogController],
@@ -11,6 +13,10 @@ import { IBlogRepositoryToken } from '../tokens/blog.repository';
     {
       provide: IBlogRepositoryToken,
       useClass: BlogRepository,
+    },
+    {
+      provide: IUserRepositoryToken,
+      useClass: RegisterRepository,
     },
     BlogService,
   ],

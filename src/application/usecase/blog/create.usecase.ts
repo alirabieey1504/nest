@@ -1,11 +1,16 @@
+import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { blogDto } from 'src/application/dtos/blog/interface.create';
 // import { Blog } from 'src/domain/entities/blog';
-import { IBlogRepository } from 'src/domain/interfaces/blog/interface.blog';
-import { IUserRepository } from 'src/domain/interfaces/user/interface.user';
-
+import type { IBlogRepository } from 'src/domain/interfaces/blog/interface.blog';
+import type { IUserRepository } from 'src/domain/interfaces/user/interface.user';
+import { IBlogRepositoryToken } from 'src/presentation/tokens/blog.repository';
+import { IUserRepositoryToken } from 'src/presentation/tokens/user.repository';
+@Injectable()
 export class BlogService {
   constructor(
+    @Inject(IBlogRepositoryToken)
     private readonly BlogRepo: IBlogRepository,
+    @Inject(IUserRepositoryToken)
     private readonly usersRepo: IUserRepository,
   ) {}
 
@@ -16,6 +21,8 @@ export class BlogService {
       phoneNumber: data.phoneNumber,
       email: data.email,
     });
+    if (!myUser) throw new BadRequestException('error 404 user not found');
+
     console.log(myUser, 'this is user');
     // const newBlog = new Blog({
     //   title: data.title,

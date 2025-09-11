@@ -5,6 +5,7 @@ import { UserInput } from '../../dtos/user/interface.register';
 import { HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
 import { FindUserService } from './find.usecase';
 import { IUserRepositoryToken } from 'src/presentation/tokens/user.repository';
+import { error } from 'console';
 @Injectable()
 export class RegisterService {
   constructor(
@@ -33,6 +34,7 @@ export class RegisterService {
         input.phoneNumber,
         input.secretKey || '',
       );
+      if (!user) throw new error();
 
       console.log(input, 'this is input');
       const test = await this.RegisterRepo.save(user);

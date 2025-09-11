@@ -1,26 +1,13 @@
 import { Module } from '@nestjs/common';
 import { UserController } from '../controller/user.controller';
 import { RegisterService } from 'src/application/usecase/user/register.usecase';
-// import { DataSource } from 'typeorm';
 import { FindUserService } from 'src/application/usecase/user/find.usecase';
-import { DatabaseModule } from 'src/infrastracture/database/database.module';
-// import { UserRepositoryProvider } from 'src/infrastracture/providers/user.repository.provider';
 import { ListService } from 'src/application/usecase/user/list.usecase';
-import { IUserRepositoryToken } from '../tokens/user.repository';
-import { RegisterRepository } from 'src/infrastracture/repository/user.repository';
+import { UserInfraModule } from 'src/infrastracture/module/user.infrastracture';
 
 @Module({
-  imports: [DatabaseModule],
+  imports: [UserInfraModule],
   controllers: [UserController],
-  providers: [
-    {
-      provide: IUserRepositoryToken,
-      useClass: RegisterRepository,
-    },
-    RegisterService,
-    FindUserService,
-    ListService,
-    // UserRepositoryProvider,
-  ],
+  providers: [RegisterService, FindUserService, ListService],
 })
 export class UserModule {}
