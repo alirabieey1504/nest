@@ -1,24 +1,11 @@
 import { Module } from '@nestjs/common';
 import { BlogController } from '../controller/blog.controller';
-import { DatabaseModule } from 'src/infrastracture/database/database.module';
 import { BlogService } from 'src/application/usecase/blog/create.usecase';
-import { BlogRepository } from 'src/infrastracture/repository/blog.repository';
-import { IBlogRepositoryToken } from '../tokens/blog.repository';
-import { IUserRepositoryToken } from '../tokens/user.repository';
-import { RegisterRepository } from 'src/infrastracture/repository/user.repository';
+import { FindUserService } from 'src/application/usecase/user/find.usecase';
+import { BlogInfraModule } from 'src/infrastracture/module/blog.infrastracture';
 @Module({
-  imports: [DatabaseModule],
+  imports: [BlogInfraModule],
   controllers: [BlogController],
-  providers: [
-    {
-      provide: IBlogRepositoryToken,
-      useClass: BlogRepository,
-    },
-    {
-      provide: IUserRepositoryToken,
-      useClass: RegisterRepository,
-    },
-    BlogService,
-  ],
+  providers: [BlogService, FindUserService],
 })
 export class BlogModule {}
