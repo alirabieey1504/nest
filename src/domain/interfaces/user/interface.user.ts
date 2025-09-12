@@ -4,6 +4,6 @@ import { FindUser } from 'src/application/dtos/user/interface.finduser';
 
 export interface IUserRepository {
   save(user: User): Promise<object>;
-  findByPhone(data: FindUser): Promise<object | null>;
+  findByPhone(data: FindUser): Promise<string | undefined>;
   list(): Promise<UserInput[]>;
 }
