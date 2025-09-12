@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { CommentController } from '../controller/comment.controller';
-import { DatabaseModule } from 'src/infrastracture/database/database.module';
+import { CommentInfraModule } from 'src/infrastracture/module/comment.infrastracture';
 @Module({
-  imports: [DatabaseModule],
+  imports: [CommentInfraModule],
   controllers: [CommentController],
   providers: [],
 })

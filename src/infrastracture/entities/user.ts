@@ -1,5 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 import { BlogEntity } from './blog';
+import { CommentEntity } from './comments';
 
 @Entity('users')
 export class UserEntity {
@@ -23,6 +24,10 @@ export class UserEntity {
 
   @Column()
   secretKey: string;
+
   @OneToMany(() => BlogEntity, (blog) => blog.author)
   blog: BlogEntity;
+
+  @OneToMany(() => CommentEntity, (comment) => comment.user)
+  comment: CommentEntity;
 }
