@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { BlogEntity } from './blog';
 
 @Entity('users')
 export class UserEntity {
@@ -22,4 +23,6 @@ export class UserEntity {
 
   @Column()
   secretKey: string;
+  @OneToMany(() => BlogEntity, (blog) => blog.author)
+  blog: BlogEntity;
 }
