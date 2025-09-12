@@ -13,6 +13,7 @@ import { BlogEntity } from '../entities/blog';
       username: 'ali',
       password: 'postgres',
       database: 'blog',
+      autoLoadEntities: true,
       entities: [UserEntity, CommentEntity, BlogEntity],
       synchronize: true,
     }),

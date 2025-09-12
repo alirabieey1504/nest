@@ -1,8 +1,11 @@
-import { Column, JoinColumn, ManyToOne } from 'typeorm';
+import { Column, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
 import { UserEntity } from './user';
 import { BlogEntity } from './blog';
 
 export class CommentEntity {
+  @Column({ primary: true })
+  id: string;
+
   @Column()
   text: string;
 
@@ -22,4 +25,13 @@ export class CommentEntity {
   @ManyToOne(() => BlogEntity, (blog) => blog.comment)
   @JoinColumn({ name: 'blogId' })
   blog: BlogEntity;
+
+  @ManyToOne(() => CommentEntity, (comment) => comment.children, {
+    nullable: true,
+  })
+  @JoinColumn({ name: 'parentId' })
+  parent: CommentEntity;
+
+  @OneToMany(() => CommentEntity, (comment) => comment.parent)
+  children: CommentEntity[];
 }

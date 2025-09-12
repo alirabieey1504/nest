@@ -1,18 +1,18 @@
-import { blogDto } from 'src/application/dtos/blog/interface.create';
-import { User, Role } from './user';
+import { randomUUID } from 'node:crypto';
 
 export class comment {
   public comments: comment[] = [];
   public depth: number = 0;
+  private readonly id: string;
   constructor(
-    public readonly user: User,
+    public readonly userId: string,
     public readonly text: string,
     public readonly createdAt: string,
-    public blog: blogDto,
-  ) {}
-  get userRole(): Role {
-    return this.user.getRole();
+    public blogId: string,
+  ) {
+    this.id = randomUUID();
   }
+
   addComments(newComment: comment) {
     if (this.depth > 3) {
       throw new Error('can not add comment');

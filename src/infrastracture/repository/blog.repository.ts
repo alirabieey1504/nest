@@ -18,7 +18,8 @@ export class BlogRepository implements IBlogRepository {
       description: blog.description,
       authorId: blog.authorId,
     });
-    await this.repository.save(createBlog);
+    const test = await this.repository.save(createBlog);
+    console.log(test, 'this is test');
     return {
       mesage: 'htis sd',
     };
