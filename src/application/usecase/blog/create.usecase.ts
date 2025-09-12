@@ -1,6 +1,6 @@
 import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { blogDto } from 'src/application/dtos/blog/interface.create';
-// import { Blog } from 'src/domain/entities/blog';
+import { Blog } from 'src/domain/entities/blog';
 import type { IBlogRepository } from 'src/domain/interfaces/blog/interface.blog';
 import type { IUserRepository } from 'src/domain/interfaces/user/interface.user';
 import { IBlogRepositoryToken } from 'src/presentation/tokens/blog.repository';
@@ -17,25 +17,31 @@ export class BlogService {
   async createBlog(data: blogDto): Promise<object> {
     console.log('this is createBlog');
     console.log(data, 'this is test');
-    const myUser = await this.usersRepo.findByPhone({
+    const UserId = await this.usersRepo.findByPhone({
       phoneNumber: data.phoneNumber,
       email: data.email,
     });
-    if (!myUser) throw new BadRequestException('error 404 user not found');
 
-    console.log(myUser, 'this is user');
+    console.log(UserId, 'this is userfffffffffffffffffff');
     // const newBlog = new Blog({
     //   title: data.title,
     //   description: data.description,
     //   author: User,
     // });
-    if (!myUser) {
-      throw new Error('user not found');
+    if (!UserId) {
+      throw new BadRequestException('error 404 user not found');
     } else {
-      console.log(myUser, 'this is usr');
-      // const lb = new Blog(data.title, data.description, myUser);
+      console.log('hello my namme');
+
+      const blog = new Blog(data.title, data.description, UserId);
+      console.log(blog, 'this is blog');
       // console.log(lb, 'this is new blog');
-      return await this.BlogRepo.createBlog();
+      const result = await this.BlogRepo.createBlog(blog);
+
+      return {
+        message: 'this is success',
+        result: result,
+      };
     }
   }
 }

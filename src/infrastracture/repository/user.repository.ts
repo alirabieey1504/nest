@@ -30,15 +30,14 @@ export class RegisterRepository implements IUserRepository {
     console.log(saveUser, 'this is co');
     return await this.AuthRepo.save(saveUser);
   }
-  async findByPhone(data: FindUser): Promise<UserEntity | null> {
+  async findByPhone(data: FindUser): Promise<string | undefined> {
     try {
       console.log('this is repo phone find');
       const user = await this.AuthRepo.findOne({
         where: [{ phoneNumber: data.phoneNumber }, { email: data.email }],
       });
-      console.log(user, 'this is resutl find user');
-
-      return user;
+      console.log(user?.id, 'this is resutl find user');
+      return user?.id;
     } catch (error) {
       throw new Error(error);
     }
