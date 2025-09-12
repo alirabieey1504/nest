@@ -1,10 +1,10 @@
-import { Entity, Column, OneToMany } from 'typeorm';
+import { Entity, Column, OneToMany, PrimaryColumn } from 'typeorm';
 import { BlogEntity } from './blog';
 import { CommentEntity } from './comments';
 
 @Entity('users')
 export class UserEntity {
-  @Column({ primary: true })
+  @PrimaryColumn()
   id: string;
 
   @Column()
@@ -26,8 +26,8 @@ export class UserEntity {
   secretKey: string;
 
   @OneToMany(() => BlogEntity, (blog) => blog.author)
-  blog: BlogEntity;
+  blogs: BlogEntity[];
 
   @OneToMany(() => CommentEntity, (comment) => comment.user)
-  comment: CommentEntity;
+  comments: CommentEntity[];
 }

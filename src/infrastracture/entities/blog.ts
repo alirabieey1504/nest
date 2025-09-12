@@ -1,11 +1,18 @@
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+  PrimaryColumn,
+} from 'typeorm';
 
 import { UserEntity } from './user';
 import { CommentEntity } from './comments';
 
 @Entity('blog')
 export class BlogEntity {
-  @Column({ primary: true })
+  @PrimaryColumn()
   id: string;
 
   @Column()
@@ -19,7 +26,7 @@ export class BlogEntity {
   @Column()
   authorId: string;
 
-  @ManyToOne(() => UserEntity, (user) => user.blog)
+  @ManyToOne(() => UserEntity, (user) => user.blogs)
   @JoinColumn({ name: 'authorId' })
   author: UserEntity;
 
@@ -27,5 +34,5 @@ export class BlogEntity {
   countView: number;
 
   @OneToMany(() => CommentEntity, (comment) => comment.blog)
-  comment: CommentEntity[];
+  comments: CommentEntity[];
 }
