@@ -1,4 +1,4 @@
-import { BadRequestException, Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { blogDto } from 'src/application/dtos/blog/interface.create';
 import { blogRepoDto } from 'src/application/repositoryDto/blog/blog.repository.dto';
 import { Blog } from 'src/domain/entities/blog';
@@ -30,17 +30,16 @@ export class BlogService {
       email: data.email,
     });
 
-    console.log(UserId, 'this is userfffffffffffffffffff');
+    console.log(UserId, 'this is ');
     // const newBlog = new Blog({
     //   title: data.title,
     //   description: data.description,
     //   author: User,
     // });
     if (!UserId) {
-      throw new BadRequestException('error 404 user not found');
+      throw new NotFoundException('error 400 user not found');
     } else {
       console.log('hello my namme');
-
       const blog = new Blog(data.title, data.description, UserId);
       console.log(blog, 'this is blog');
       // console.log(lb, 'this is new blog');

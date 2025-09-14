@@ -8,6 +8,7 @@ export class BlogController {
   @Post('create')
   async create(@Body() dto: CreateBlogDto) {
     console.log(dto, 'this is my dto');
+
     await this.blogService.createBlog(dto);
     console.log('this is a test');
   }
