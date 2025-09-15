@@ -12,21 +12,22 @@ import { CommentEntity } from './comments';
 
 @Entity('blog')
 export class BlogEntity {
-  @PrimaryColumn()
+  @PrimaryColumn('uuid')
   id: string;
 
   @Column()
   title: string;
+
   @Column()
   description: string;
 
   @Column()
-  createdat: Date;
+  createdAt: Date;
 
   @Column()
   authorId: string;
 
-  @ManyToOne(() => UserEntity, (user) => user.blogs)
+  @ManyToOne(() => UserEntity, (user) => user.blogs, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'authorId' })
   author: UserEntity;
 

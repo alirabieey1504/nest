@@ -14,6 +14,7 @@ import { BlogEntity } from '../entities/blog';
       password: 'postgres',
       database: 'blog',
       entities: [UserEntity, CommentEntity, BlogEntity],
+      migrations: ['src/migrations'],
       synchronize: false,
     }),
     TypeOrmModule.forFeature([UserEntity, CommentEntity, BlogEntity]),

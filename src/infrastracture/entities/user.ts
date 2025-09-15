@@ -4,8 +4,8 @@ import { CommentEntity } from './comments';
 
 @Entity('users')
 export class UserEntity {
-  @PrimaryColumn()
-  id: string;
+  @PrimaryColumn('uuid')
+  id?: string;
 
   @Column()
   firstName: string;

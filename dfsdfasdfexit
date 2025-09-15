@@ -1,0 +1,13 @@
+                            Table "public.users"
+   Column    |       Type        | Collation | Nullable |      Default       
+-------------+-------------------+-----------+----------+--------------------
+ id          | uuid              |           | not null | uuid_generate_v4()
+ firstName   | character varying |           | not null | 
+ lastName    | character varying |           | not null | 
+ password    | character varying |           | not null | 
+ email       | character varying |           | not null | 
+ phoneNumber | character varying |           | not null | 
+ secretKey   | character varying |           | not null | 
+Indexes:
+    "PK_a3ffb1c0c8416b9fc6f907b7433" PRIMARY KEY, btree (id)
+

@@ -11,7 +11,7 @@ import { BlogEntity } from './blog';
 
 @Entity('comment')
 export class CommentEntity {
-  @PrimaryColumn()
+  @PrimaryColumn('uuid')
   id: string;
 
   @Column()
@@ -20,22 +20,17 @@ export class CommentEntity {
   @Column()
   createdAt: Date;
 
-  @Column()
-  userId: string;
-
-  @ManyToOne(() => UserEntity, (user) => user.comments)
+  @ManyToOne(() => UserEntity, (user) => user.comments, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'userId' })
   user: UserEntity;
 
-  @Column()
-  blogId: string;
-
-  @ManyToOne(() => BlogEntity, (blog) => blog.comments)
+  @ManyToOne(() => BlogEntity, (blog) => blog.comments, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'blogId' })
   blog: BlogEntity;
 
   @ManyToOne(() => CommentEntity, (comment) => comment.children, {
     nullable: true,
+    onDelete: 'CASCADE',
   })
   @JoinColumn({ name: 'parentId' })
   parent: CommentEntity;
