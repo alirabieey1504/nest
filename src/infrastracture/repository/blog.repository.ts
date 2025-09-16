@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { IBlogRepository } from 'src/domain/interfaces/blog/interface.blog';
 import { BlogEntity } from '../entities/blog';
@@ -36,7 +36,7 @@ export class BlogRepository implements IBlogRepository {
   }
   async listBlog(): Promise<blogListDto[] | object> {
     try {
-      return await this.repository.find({
+      const blogList = await this.repository.find({
         select: {
           title: true,
           description: true,
@@ -44,6 +44,8 @@ export class BlogRepository implements IBlogRepository {
         },
         relations: { author: true },
       });
+      if (blogList.length == 0) throw new NotFoundException('not found blog');
+      return blogList;
     } catch (error) {
       console.log(error);
       return { message: 'error 500' };
