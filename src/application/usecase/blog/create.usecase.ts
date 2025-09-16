@@ -6,7 +6,7 @@ import type { IUserRepository } from 'src/domain/interfaces/user/interface.user'
 import { IBlogRepositoryToken } from 'src/presentation/tokens/blog.repository';
 import { IUserRepositoryToken } from 'src/presentation/tokens/user.repository';
 @Injectable()
-export class BlogService {
+export class CreateBlogUseCase {
   constructor(
     @Inject(IBlogRepositoryToken)
     private readonly BlogRepo: IBlogRepository,

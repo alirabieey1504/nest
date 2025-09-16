@@ -2,7 +2,7 @@ import { UserInput } from 'src/application/dtos/user/interface.register';
 import type { IUserRepository } from 'src/domain/interfaces/user/interface.user';
 import { IUserRepositoryToken } from 'src/presentation/tokens/user.repository';
 import { Inject } from '@nestjs/common';
-export class ListService {
+export class ListUserUseCase {
   constructor(
     @Inject(IUserRepositoryToken)
     private readonly RegisterRepo: IUserRepository,

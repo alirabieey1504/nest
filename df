@@ -1,0 +1,9 @@
+                  id                  |  title  |     description      |               authorId               | countView |        createdAt        
+--------------------------------------+---------+----------------------+--------------------------------------+-----------+-------------------------
+ 57da2f20-fcd5-477b-bc72-863cf5184016 | mytesta | hi my name is eminem | 46a1a519-8ccf-4393-9c0c-26e3e507e7de |         0 | 2025-09-16 09:39:06.415
+ c6837d02-a1d2-4d05-aa7a-90684a1a133c | mytesta | hi my name is eminem | 46a1a519-8ccf-4393-9c0c-26e3e507e7de |         0 | 2025-09-16 09:49:33.033
+ 24245c95-0b03-4b01-9f9c-c03457bcf472 | mytesta | hi my name is eminem | 46a1a519-8ccf-4393-9c0c-26e3e507e7de |         0 | 2025-09-16 09:52:56.398
+ a658f25c-dbbf-44da-8564-8c64dc3daff1 | mytesta | hi my name is eminem | 46a1a519-8ccf-4393-9c0c-26e3e507e7de |         0 | 2025-09-16 09:54:28.96
+ 6d080bba-df04-40a6-afbc-86940cef2be0 | mytesta | hi my name is eminem | 46a1a519-8ccf-4393-9c0c-26e3e507e7de |         0 | 2025-09-16 09:57:33.404
+(5 rows)
+
