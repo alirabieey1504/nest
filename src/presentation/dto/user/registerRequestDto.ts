@@ -11,12 +11,15 @@ export class RegisterRequestDto {
   @IsString()
   @IsNotEmpty()
   firstName: string;
+
   @IsString()
   lastName: string;
+
   @IsString()
   @Length(6, 16)
   @IsNotEmpty()
   password: string;
+
   @IsNotEmpty()
   @IsEmail()
   email: string;

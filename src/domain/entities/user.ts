@@ -38,6 +38,9 @@ export class User {
   get GetSecretKey() {
     return this.secretKey;
   }
+  get getId() {
+    return this.id;
+  }
   private checkValidationPassword() {
     if (/\d/.test(this.password)) throw new Error('Password contain a number');
     if (!/[A-Z]/.test(this.password))

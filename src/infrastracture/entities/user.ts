@@ -5,7 +5,7 @@ import { CommentEntity } from './comments';
 @Entity('users')
 export class UserEntity {
   @PrimaryColumn('uuid')
-  id?: string;
+  id: string;
 
   @Column()
   firstName: string;

@@ -42,6 +42,7 @@ export class BlogService {
       console.log('hello my namme');
       const blog = new Blog(data.title, data.description, UserId);
       console.log(blog, 'this is blog');
+
       // console.log(lb, 'this is new blog');
       const blogMapper = this.createBlogMapper(blog);
       const result = await this.BlogRepo.createBlog(blogMapper);

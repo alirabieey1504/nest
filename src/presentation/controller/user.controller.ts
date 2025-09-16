@@ -7,7 +7,6 @@ import {
 } from '@nestjs/common';
 import { RegisterRequestDto } from '../dto/user/registerRequestDto';
 import { RegisterService } from 'src/application/usecase/user/register.usecase';
-import { UserInput } from 'src/application/dtos/user/interface.register';
 import { ListService } from 'src/application/usecase/user/list.usecase';
 
 @Controller('auth')
@@ -19,16 +18,7 @@ export class UserController {
   @Post('register')
   async submitDataForRegister(@Body() dto: RegisterRequestDto) {
     try {
-      console.log(dto, 'this is input');
-      const input: UserInput = {
-        firstName: dto.firstName,
-        lastName: dto.lastName,
-        password: dto.password,
-        email: dto.email,
-        phoneNumber: dto.phoneNumber,
-        secretKey: dto.secretKey,
-      };
-      const user = await this.registerService.Register(input);
+      const user = await this.registerService.Register(dto);
       console.log(user, 'this is req');
       return user;
     } catch (error) {

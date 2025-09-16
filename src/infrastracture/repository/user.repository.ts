@@ -20,6 +20,7 @@ export class RegisterRepository implements IUserRepository {
     console.log('this is ffff');
 
     const saveUser = this.AuthRepo.create({
+      id: user.getId,
       firstName: user.firstName,
       lastName: user.lastName,
       password: user.GetPassword,

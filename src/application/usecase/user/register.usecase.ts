@@ -34,6 +34,7 @@ export class RegisterService {
         input.phoneNumber,
         input.secretKey || '',
       );
+      console.log('this is r', user);
       if (!user) throw new error();
 
       console.log(input, 'this is input');
