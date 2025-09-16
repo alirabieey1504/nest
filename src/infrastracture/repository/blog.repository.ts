@@ -33,4 +33,7 @@ export class BlogRepository implements IBlogRepository {
       };
     }
   }
+  async listBlog(): Promise<any[]> {
+    return await this.repository.find();
+  }
 }

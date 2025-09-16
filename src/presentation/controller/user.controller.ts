@@ -7,13 +7,13 @@ import {
 } from '@nestjs/common';
 import { RegisterRequestDto } from '../dto/user/registerRequestDto';
 import { RegisterService } from 'src/application/usecase/user/register.usecase';
-import { ListService } from 'src/application/usecase/user/list.usecase';
+import { ListUserUseCase } from 'src/application/usecase/user/list.usecase';
 
 @Controller('auth')
 export class UserController {
   constructor(
     private readonly registerService: RegisterService,
-    private readonly listService: ListService,
+    private readonly listService: ListUserUseCase,
   ) {}
   @Post('register')
   async submitDataForRegister(@Body() dto: RegisterRequestDto) {

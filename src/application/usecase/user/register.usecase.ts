@@ -19,7 +19,6 @@ export class RegisterService {
       phoneNumber: input.phoneNumber,
       email: input.email,
     });
-    console.log(resutFindUser, 'this is resutl find');
     if (resutFindUser == true) {
       throw new HttpException(
         'user with this email or phoneNumber already exist ',
@@ -34,11 +33,8 @@ export class RegisterService {
         input.phoneNumber,
         input.secretKey || '',
       );
-      console.log('this is r', user);
       if (!user) throw new error();
-      console.log(input, 'this is input');
       const test = await this.RegisterRepo.save(user);
-      console.log(test, 'this is a test');
       return test;
     }
   }
