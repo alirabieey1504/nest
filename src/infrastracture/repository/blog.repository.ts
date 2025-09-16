@@ -4,6 +4,7 @@ import { IBlogRepository } from 'src/domain/interfaces/blog/interface.blog';
 import { BlogEntity } from '../entities/blog';
 import { Repository } from 'typeorm';
 import { Blog } from 'src/domain/entities/blog';
+import { blogListDto } from 'src/application/repositoryDto/blog/blog.list.dto';
 
 @Injectable()
 export class BlogRepository implements IBlogRepository {
@@ -33,12 +34,19 @@ export class BlogRepository implements IBlogRepository {
       };
     }
   }
-  async listBlog(): Promise<any[]> {
+  async listBlog(): Promise<blogListDto[] | object> {
     try {
-      console.log('this is test3333');
-      return await this.repository.find({ select: { id: true } });
+      return await this.repository.find({
+        select: {
+          title: true,
+          description: true,
+          author: { firstName: true, lastName: true },
+        },
+        relations: { author: true },
+      });
     } catch (error) {
-      return [{ message: `${error}` }];
+      console.log(error);
+      return { message: 'error 500' };
     }
   }
 }

@@ -2,6 +2,7 @@ import { Body, Controller, Get, Post } from '@nestjs/common';
 import { CreateBlogUseCase } from 'src/application/usecase/blog/create.usecase';
 import { CreateBlogDto } from '../dto/blog/CreateBlogDto';
 import { ListBlogUseCase } from 'src/application/usecase/blog/list.usecase';
+import { blogListDto } from 'src/application/repositoryDto/blog/blog.list.dto';
 
 @Controller('blog')
 export class BlogController {
@@ -15,7 +16,7 @@ export class BlogController {
     return await this.blogCreateService.createBlog(dto);
   }
   @Get('list')
-  async list() {
+  async list(): Promise<blogListDto[] | object> {
     console.log('this is log');
     return await this.blogListService.execute();
   }
