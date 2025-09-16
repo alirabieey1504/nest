@@ -15,13 +15,6 @@ export class BlogService {
     private readonly usersRepo: IUserRepository,
   ) {}
 
-  createBlogMapper(blog: Blog): blogRepoDto {
-    return {
-      title: blog.title,
-      description: blog.description,
-      authorId: blog.autherId,
-    };
-  }
   async createBlog(data: blogDto): Promise<object> {
     console.log('this is createBlog');
     console.log(data, 'this is test');
@@ -31,22 +24,14 @@ export class BlogService {
     });
 
     console.log(UserId, 'this is ');
-    // const newBlog = new Blog({
-    //   title: data.title,
-    //   description: data.description,
-    //   author: User,
-    // });
     if (!UserId) {
       throw new NotFoundException('error 400 user not found');
     } else {
-      console.log('hello my namme');
+      console.log('hello my name');
       const blog = new Blog(data.title, data.description, UserId);
       console.log(blog, 'this is blog');
 
-      // console.log(lb, 'this is new blog');
-      const blogMapper = this.createBlogMapper(blog);
-      const result = await this.BlogRepo.createBlog(blogMapper);
-
+      const result = await this.BlogRepo.createBlog(blog);
       return {
         message: 'this is success',
         result: result,

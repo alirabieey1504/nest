@@ -12,18 +12,26 @@ export class BlogRepository implements IBlogRepository {
     private readonly repository: Repository<BlogEntity>,
   ) {}
   async createBlog(blog: Blog): Promise<object | undefined> {
-    console.log(blog, 'this is ');
-    const createBlog = this.repository.create({
-      title: blog.title,
-      description: blog.description,
-      authorId: blog.autherId,
-      createdAt: blog.createdAt,
-      countView: blog.countView,
-    });
-    const test = await this.repository.save(createBlog);
-    console.log(test, 'this is test');
-    return {
-      mesage: 'htis sd',
-    };
+    try {
+      console.log(blog, 'this is ');
+      const id = blog.getId();
+      const createBlog = this.repository.create({
+        id: id,
+        title: blog.title,
+        description: blog.description,
+        authorId: blog.authorId,
+        createdAt: blog.createdAt,
+        countView: blog.countView,
+      });
+      await this.repository.save(createBlog);
+      return {
+        message: 'it was successfully ',
+      };
+    } catch (error) {
+      console.log(error, 'it was successfully ');
+      return {
+        message: 'there is a error ',
+      };
+    }
   }
 }

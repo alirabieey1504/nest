@@ -10,7 +10,7 @@ export class Blog {
   constructor(
     public title: string,
     public description: string,
-    public autherId: string,
+    public authorId: string,
   ) {
     this.id = randomUUID();
     this.createdAt = new Date();
