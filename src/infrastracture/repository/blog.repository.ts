@@ -25,12 +25,11 @@ export class BlogRepository implements IBlogRepository {
       });
       await this.repository.save(createBlog);
       return {
-        message: 'it was successfully ',
+        message: 'blog creation  was successfully',
       };
     } catch (error) {
-      console.log(error, 'it was successfully ');
       return {
-        message: 'there is a error ',
+        message: `${error}`,
       };
     }
   }
