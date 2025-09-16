@@ -34,6 +34,11 @@ export class BlogRepository implements IBlogRepository {
     }
   }
   async listBlog(): Promise<any[]> {
-    return await this.repository.find();
+    try {
+      console.log('this is test3333');
+      return await this.repository.find({ select: { id: true } });
+    } catch (error) {
+      return [{ message: `${error}` }];
+    }
   }
 }
